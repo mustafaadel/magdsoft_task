@@ -226,7 +226,9 @@ class LoginScreen extends StatelessWidget {
                               SizedBox(height: 3.h),
                               BlocConsumer<LoginCubit, LoginState>(
                                 listener: (context, state) {
-                                  onTapLogin(context);
+                                  if (state is LoginSuccess) {
+                                    onTapLogin(context);
+                                  }
                                 },
                                 builder: (context, state) {
                                   return CustomElevatedButton(

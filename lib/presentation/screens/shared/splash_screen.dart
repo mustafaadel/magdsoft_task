@@ -8,7 +8,8 @@ import '../../../constants/mycolors.dart';
 import '../../../constants/strings.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  String? name, phone;
+  SplashScreen({super.key, required this.name, required this.phone});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -19,6 +20,12 @@ class _SplashScreenState extends State<SplashScreen> {
   double opacity = 0;
   void initState() {
     super.initState();
+    String secondScreen = loginScreen;
+    if (widget.name != null && widget.phone != null) {
+      print(widget.name);
+      print(widget.phone);
+      secondScreen = homeScreen;
+    }
     Timer(const Duration(milliseconds: 1000), () {
       setState(() {
         opacity = 1;
@@ -27,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(milliseconds: 3500), () {
       Navigator.popAndPushNamed(
         context,
-        loginScreen,
+        secondScreen,
       );
     });
   }

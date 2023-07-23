@@ -176,6 +176,6 @@ class _VerifyScreenState extends State<VerifyScreen> {
   }
 
   onTapVerify(BuildContext context) {
-    Navigator.popAndPushNamed(context, helpScreen);
+    Navigator.popAndPushNamed(context, homeScreen);
   }
 }

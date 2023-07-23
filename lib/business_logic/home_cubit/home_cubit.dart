@@ -1,16 +1,15 @@
 import 'package:bloc/bloc.dart';
-import 'package:magdsoft_flutter_structure/data/models/product_model.dart';
 import 'package:meta/meta.dart';
 
 import '../../data/data_providers/repository/product_repository.dart';
+import '../../data/models/product_model.dart';
 
-part 'product_state.dart';
+part 'home_state.dart';
 
-class ProductCubit extends Cubit<ProductState> {
+class HomeCubit extends Cubit<HomeState> {
   final ProductRepository _productRepository;
   List<Products> _product = [];
-  ProductCubit(this._productRepository) : super(ProductInitial());
-
+  HomeCubit(this._productRepository) : super(HomeInitial());
   List<Products> product() {
     _productRepository.getAllProducts().then((product) {
       emit(ProductLoaded(product));
@@ -18,5 +17,9 @@ class ProductCubit extends Cubit<ProductState> {
     });
 
     return _product;
+  }
+
+  selectCard(int index) {
+    emit(CardSelected(selectedIndex: index));
   }
 }

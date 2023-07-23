@@ -7,7 +7,7 @@ class CacheHelper {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  static dynamic getDataFromSharedPreference({required String key}) {
+  static dynamic getData({required String key}) {
     return sharedPreferences.get(key);
   }
 
@@ -28,7 +28,7 @@ class CacheHelper {
     return await sharedPreferences.remove(key);
   }
 
-  static Future clearData(){
+  static Future clearData() {
     return sharedPreferences.clear();
   }
 }

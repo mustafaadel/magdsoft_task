@@ -1,80 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:magdsoft_flutter_structure/business_logic/home_cubit/home_cubit.dart';
 import 'package:sizer/sizer.dart';
 
+import 'custom_icon_button.dart';
+import 'custom_image_view.dart';
+
 class BrandCard extends StatelessWidget {
+  Color color;
   String image;
   String brand;
-  bool selected;
-  Function()? select;
-
-  BrandCard({
-    Key? key,
-    required this.brand,
-    required this.selected,
-    required this.select,
-    required this.image,
-  }) : super(key: key);
+  int index;
+  BrandCard(
+      {super.key,
+      required this.color,
+      required this.brand,
+      required this.image,
+      required this.index});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: select,
-      child: SizedBox(
-        width: 40.w,
-        height: 10.h,
-        child: Card(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
-          ),
-          color: selected == false ? Colors.white : Colors.blue,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.0),
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.topRight,
-                  colors: [
-                    selected == true ? const Color(0xD90062BD) : Colors.white,
-                    selected == true ? const Color(0x000062BD) : Colors.white,
-                  ],
-                  stops: const [
-                    0,
-                    1
-                  ]),
-            ),
-            child: Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 3.w),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                        shape: BoxShape.circle,
-                      ),
-                      child: CircleAvatar(
-                        radius: 20.sp,
-                        backgroundColor: Colors.white,
-                        child: Image.asset(image, height: 30.sp),
-                      )),
-                ),
-                Text(
-                  brand,
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: selected == false ? Colors.black87 : Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+    return GestureDetector(
+      onTap: () {
+        // ignore: avoid_print
+        BlocProvider.of<HomeCubit>(context).selectCard(index);
+      },
+      child: Container(
+          padding:
+              const EdgeInsets.only(left: 10, top: 6, right: 10, bottom: 6),
+          margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: color,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black87.withOpacity(0.25),
+                spreadRadius: 2,
+                blurRadius: 2,
+                offset: const Offset(2, 2),
+              ),
+            ],
+          ).copyWith(borderRadius: BorderRadius.circular(25)),
+          child: Row(children: [
+            CustomIconButton(
+                height: 40,
+                width: 40,
+                padding: const EdgeInsets.all(6),
+                decoration: IconButtonStyleHelper.outlineBlack900TL20,
+                child: CustomImageView(imagePath: image)),
+            Padding(
+                padding: const EdgeInsets.only(left: 13, top: 6, bottom: 6),
+                child: Text(brand,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                    )))
+          ])),
     );
   }
 }
