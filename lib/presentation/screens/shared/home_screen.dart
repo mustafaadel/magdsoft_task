@@ -278,7 +278,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           Expanded(
                                             child: Container(
-                                                height: height * 0.7,
                                                 width: double.infinity,
                                                 margin: const EdgeInsets.only(
                                                     top: 22),

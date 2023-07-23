@@ -22,8 +22,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     String secondScreen = loginScreen;
     if (widget.name != null && widget.phone != null) {
-      print(widget.name);
-      print(widget.phone);
       secondScreen = homeScreen;
     }
     Timer(const Duration(milliseconds: 1000), () {
